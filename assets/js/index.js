@@ -24,7 +24,7 @@ $(function () {
 
 }) //入口函数
 
-
+//此方法必须写在入口函数外面，成全局函数，方便其他页面调用此方法
 // 获取用户的基本信息封装
 function grtUserInfo() {
     $.ajax({
@@ -56,18 +56,43 @@ function grtUserInfo() {
 function renderUser(user) {
     // 1.获取用户名称
     var name = user.nickname || user.username;
+
     //2.设置欢迎的文本
     $('#welcom').html('欢迎&nbsp;&nbsp;' + name)
+
     // 3.按需求渲染用户的头像
     if (user.user_pic !== null) {
         //渲染图片头像
         $('.layui-nav-img').attr('src', user.user_pic).show()
         $('.text-avatar').hide()
     } else {
-        //渲染文本头像     
+
+        //渲染文本头像
         $(".layui-nav-img").hide()
         var first = name[0].toUpperCase();//获取的文本名字首字母大写
         $(".text-avatar").show().html(first);
+        
+
     }
     
+
+
+    //    //获取用户名称
+    //    var name = user.nickname || user.username
+
+    //    if (user.user_pic !== null) {
+    //        //渲染用户头像
+    //        $('.layui-nav-img').attr('src', user.user_pic).show()
+    //        $('.text-avatar').hide()
+    //    } else {
+    //        //渲染文本头像
+    //        $('.layui-nav-img').hide()
+    //        var first = name[0].toUpperCase()
+    //        $('.text-avatar').html(first).show()
+    //    }
+    //    //设置欢迎的文本
+    //    $('#welcome').html('欢迎&nbsp;&nbsp;' + name)
+    //    //按需渲染用户的头像
+    
+
 }
