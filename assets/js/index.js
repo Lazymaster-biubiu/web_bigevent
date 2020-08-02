@@ -71,6 +71,7 @@ function renderUser(user) {
         $(".layui-nav-img").hide()
         var first = name[0].toUpperCase();//获取的文本名字首字母大写
         $(".text-avatar").show().html(first);
+        
 
     }
     
