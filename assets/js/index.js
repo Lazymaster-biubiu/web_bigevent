@@ -63,12 +63,11 @@ function renderUser(user) {
         //渲染图片头像
         $('.layui-nav-img').attr('src', user.user_pic).show()
         $('.text-avatar').hide()
-
     } else {
-        //渲染文本头像
-        var first = name[0].toUPperCase() //获取的文本名字首字母大写
-        $('.text-avatar').html(first).show()
-
-
+        //渲染文本头像     
+        $(".layui-nav-img").hide()
+        var first = name[0].toUpperCase();//获取的文本名字首字母大写
+        $(".text-avatar").show().html(first);
     }
+    
 }
