@@ -24,6 +24,11 @@ $(function () {
     //更换裁剪区图片
     //为文件选择框绑定change事件
     $('#file').on('change', function (e) {
+        // 获取用户选择的文件
+        var filelist = e.target.files
+        if (filelist.length === 0) {
+            return layer.msg('请选择照片！')
+        }
 
         //获取用户选择的文件
         var file = e.target.files[0]
@@ -47,20 +52,22 @@ $(function () {
             })
             .toDataURL('image/png') // 将 Canvas 画布上的内容，转化为 base64 格式的字符串
 
-            //发送ajaxq请求
-            $.ajax({
-                method:'POST',
-                url:'/my/update/avatar',
-                avatar: { dataURL },
-                success:function(res){
-                    if(res.status !== 0) {
-                        return layui.layer.msg('头像上传失败')
-                    }
-                    layui.layer.msg('头像上传成功')
-                    // 刷新父框架中的个人资料
-                    window.parent.grtUserInfo();
+        //发送ajaxq请求
+        $.ajax({
+            method: 'POST',
+            url: '/my/update/avatar',
+            data: {
+                avatar: dataURL
+            },
+            success: function (res) {
+                if (res.status !== 0) {
+                    return layui.layer.msg('头像上传失败')
                 }
-            })
+                layui.layer.msg('头像上传成功')
+                // 刷新父框架中的个人资料
+                window.parent.grtUserInfo();
+            }
+        })
     })
 
 
